@@ -25,22 +25,10 @@ class Carnivore extends Animal {
   // write your code here
 
   bite(beast) {
-    if (
-      beast instanceof Herbivore &&
-      beast.hidden === false &&
-      beast.health > 0
-    ) {
+    if (beast instanceof Herbivore && !beast.hidden && beast.health > 0) {
       beast.health -= 50;
 
-      if (beast.health <= 0) {
-        beast.health = 0;
-
-        const index = Animal.alive.indexOf(beast);
-
-        if (index !== -1) {
-          Animal.alive.splice(index, 1);
-        }
-      }
+      Animal.alive = Animal.alive.filter((a) => a.health > 0);
     }
   }
 }
